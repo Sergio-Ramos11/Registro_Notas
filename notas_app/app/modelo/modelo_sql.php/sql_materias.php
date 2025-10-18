@@ -9,8 +9,8 @@ class SQLMateria
     }
 
     public static function insertInto(){
-        $sql = "insert into materias(nombre, programa)values";
-        $sql .= "(?,?)";
+        $sql = "insert into materias(codigo, nombre, programa)values";
+        $sql .= "(?,?,?)";
         return $sql;
     }
 

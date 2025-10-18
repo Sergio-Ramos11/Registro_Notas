@@ -14,11 +14,11 @@ class Programa extends Modelo{
     private $nombre = null;
 
     public function get($prop){
-        return $this->$prop;
+        return $this->{$prop};
     }
 
     public function set($prop, $value){
-        $this->$prop = $value;
+        $this->{$prop} = $value;
     }
 
     public function all(){

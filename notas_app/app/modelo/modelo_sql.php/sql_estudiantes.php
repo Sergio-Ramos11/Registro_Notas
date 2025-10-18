@@ -9,8 +9,8 @@ class SQLEstudiante
     }
 
     public static function insertInto(){
-        $sql = "insert into estudiantes(nombre, email, programa)values";
-        $sql .= "(?,?,?)";
+        $sql = "insert into estudiantes(codigo, nombre, email, programa)values";
+        $sql .= "(?,?,?,?)";
         return $sql;
     }
 
