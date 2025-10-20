@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro notas</title>
 </head>
 <body>
-    <h1>Hola Menu</h1>
+    <h1>Hola menu</h1>
+    <a href="estudiante/listar.php">Estudiantes</a><br>
+    <a href="materia/listar.php">Materias</a><br>
+    <a href="programa/listar.php">Programas</a><br>
+    <a href="nota/listar.php">Notas</a>
 </body>
 </html>

@@ -7,7 +7,7 @@ class DB{
     private $hostDb = "localhost";
     private $userDb = "root";
     private $pwdDB = "";
-    private $nameDb = "registro_notas";
+    private $nameDb = "notas_app";
     public $conexDb = null;
 
     public function __construct(){

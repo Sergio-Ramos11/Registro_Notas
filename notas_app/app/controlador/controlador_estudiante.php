@@ -34,7 +34,7 @@ class EstudiantesControlador
             return false;
         }
         $estudiante = new Estudiante();
-        $estudiante->set('codigo'. $request['codigo']);
+        $estudiante->set('codigo', $request['codigo']);
         return $estudiante->delete();
     }
 

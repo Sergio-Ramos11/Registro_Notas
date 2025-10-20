@@ -32,7 +32,7 @@ class ProgramaControlador
             return false;
         }
         $programa = new Programa();
-        $programa->ser('codigo', $request['codigo']);
+        $programa->set('codigo', $request['codigo']);
         return $programa->delete();
     }
 
@@ -43,7 +43,7 @@ class ProgramaControlador
             return false;
         }
         $programa = new Programa();
-        $programa->ser('codigo', $request['codigo']);
+        $programa->set('codigo', $request['codigo']);
         $programa->set('nombre', $request['nombre']);
         return $programa->update();
 

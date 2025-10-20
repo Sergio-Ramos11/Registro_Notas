@@ -1,7 +1,7 @@
 <?php
 namespace App\Controlador;
 
-require __DIR__ . "/../modelo/estudiante.php";
+require __DIR__ . "/../modelo/materia.php";
 
 use App\Modelo\Materia;
 
@@ -26,7 +26,7 @@ class MateriaControlador
         return $materia->insert();
     } 
 
-    public function deleteMateria()
+    public function deleteMateria($request)
     {
         if(empty($request['codigo']))
         {
