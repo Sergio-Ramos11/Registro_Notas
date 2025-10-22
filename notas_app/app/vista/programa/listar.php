@@ -14,7 +14,7 @@ $programas = $programaControlador->queryAllProgramas();
     <title>Programas</title>
 </head>
 <body>
-    <a href="crear.php">Agregar Programa Nuevo</a><br>
+    <a href="../estudiantes_form.php">Agregar Programa Nuevo</a><br>
     <a href="editar.php">Actualizar Programa</a>
 
     <h1>Lista de Programas</h1>

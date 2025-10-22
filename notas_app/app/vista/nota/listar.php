@@ -44,9 +44,9 @@ $notas = $notaControlador->queryAllNota();
                 echo '      </button>';
                 echo '  </td>';
                 echo '  <td>';
-                echo '      <button>';
+                echo '      <a href="editar.php?id=' . $nota->get('id') . '">';
                 echo '          <img src="../../../public/res/editar.svg">';
-                echo '      </button>';
+                echo '      </a>';
                 echo '  </td>';
                 echo '</tr>';
             }

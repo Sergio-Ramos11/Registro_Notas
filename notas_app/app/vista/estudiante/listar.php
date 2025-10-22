@@ -14,7 +14,7 @@ $estudiantes = $estudiantesControlador->queryAllEstudiantes();
     <title>Estudiantes</title>
 </head>
 <body>
-    <a href="crear.php">Agregar Nuevo Estudiante</a><br>
+    <a href="../estudiantes_form.php">Agregar Nuevo Estudiante</a><br>
     <a href="editar.php">Actualizar Estudiante</a>
 
     <h1>Lista de Estudiantes</h1>
