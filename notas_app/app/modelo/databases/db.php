@@ -11,6 +11,7 @@ class DB{
     public $conexDb = null;
 
     public function __construct(){
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $this->conexDb = new mysqli(
             $this->hostDb, 
             $this->userDb, 

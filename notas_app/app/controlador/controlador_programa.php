@@ -1,9 +1,14 @@
 <?php
+
 namespace App\Controlador;
 
-require __DIR__ . "/../modelo/programa.php";
+require_once __DIR__ . "/../modelo/programa.php";
+require_once __DIR__ . "/../modelo/materia.php";
+require_once __DIR__ . "/../modelo/estudiante.php";
 
 use App\Modelo\Programa;
+use App\Modelo\Materia;
+use App\Modelo\Estudiante;
 
 class ProgramaControlador
 {
@@ -15,8 +20,10 @@ class ProgramaControlador
 
     public function saveNewPrograma($request)
     {
-        if($this->validar($request))
-        {
+        if (
+            empty($request['codigo'])
+            || empty($request['nombre'])
+        ) {
             return false;
         }
         $programa = new Programa();
@@ -25,33 +32,47 @@ class ProgramaControlador
         return $programa->insert();
     }
 
-    public function deleteProgrma($request)
+
+
+    public function deletePrograma($codigo)
     {
-        if(empty($request['codigo']))
-        {
-            return false;
+        /*$materiaModel = new Materia();
+        $tieneMaterias = $materiaModel->tieneMaterias($request);
+        if ($tieneMaterias) {
+            return ["error" => "No se puede eliminar este programa porque tiene materias asociadas."];
         }
+
+        $estudianteModel = new Estudiante();
+        $tieneEstudiantes = $estudianteModel->tieneEstudiantes($request);
+        if ($tieneEstudiantes) {
+            return ["error" => "No se puede eliminar este programa porque tiene estudiantes asociados."];
+        }*/
+
         $programa = new Programa();
-        $programa->set('codigo', $request['codigo']);
+        $programa->set('codigo', $codigo);
         return $programa->delete();
     }
 
     public function updatePrograma($request)
     {
-        if($this->validar($request))
-        {
-            return false;
+        $codigo = $request['codigo'];
+
+        $materiaModel = new Materia();
+        $tieneMaterias = $materiaModel->tieneMaterias($codigo);
+
+        $estudianteModel = new Estudiante();
+        $tieneEstudiantes = $estudianteModel->tieneEstudiantes($codigo);
+
+        if ($tieneMaterias || $tieneEstudiantes) {
+            return ["error" => "No se puede modificar este programa porque tiene materias o estudiantes asociados."];
         }
+
         $programa = new Programa();
-        $programa->set('codigo', $request['codigo']);
+        $programa->set('codigo', $codigo);
         $programa->set('nombre', $request['nombre']);
+
         return $programa->update();
 
-    }
-
-    private function validar($request){
-        return empty($request['codigo'] 
-            || empty($request['nombre']));
     }
 }
 ?>

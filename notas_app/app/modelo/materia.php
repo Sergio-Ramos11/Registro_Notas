@@ -1,9 +1,9 @@
 <?php
 namespace App\Modelo;
 
-require __DIR__ . '/databases/db.php';
-require __DIR__ . '/modelo_sql/modelo.php';
-require __DIR__ . '/modelo_sql/sql_materias.php';
+require_once __DIR__ . '/databases/db.php';
+require_once __DIR__ . '/modelo_sql/modelo.php';
+require_once __DIR__ . '/modelo_sql/sql_materias.php';
 
 use App\Modelo\Databases\DB;
 use App\Modelo\SQLmodelo\Modelo;
@@ -81,6 +81,15 @@ class Materia extends Modelo{
         );
         $db->close();
         return $result;
+    }
+
+    public function tieneMaterias($codigoPrograma)
+    {
+        $sql = "SELECT COUNT(*) AS cantidad FROM materias WHERE programa = ?";
+        $db = new DB();
+        $resultado = $db->execSQL($sql, true, "s", $codigoPrograma);
+        $row = $resultado->fetch_assoc();
+        return $row['cantidad'] > 0;
     }
 }
 ?>

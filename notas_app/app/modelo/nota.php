@@ -1,11 +1,13 @@
 <?php
+
 namespace App\Modelo;
 
-require __DIR__ . '/databases/db.php';
-require __DIR__ . '/modelo_sql/modelo.php';
-require __DIR__ . '/modelo_sql/sql_notas.php';
+require_once __DIR__ . '/databases/db.php';
+require_once __DIR__ . '/modelo_sql/modelo.php';
+require_once __DIR__ . '/modelo_sql/sql_notas.php';
 
 use App\Modelo\Databases\DB;;
+
 use App\Modelo\SQLmodelo\Modelo;
 use App\Modelo\SQLmodelo\SQLNota;
 
@@ -26,13 +28,14 @@ class Nota extends Modelo
         $this->{$prop} = $value;
     }
 
-    public function all(){
+    public function all()
+    {
         $sql = SQLNota::selectAll();
         $db = new DB();
         $result = $db->execSQL($sql, true);
         $notas = [];
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $nota = new Nota();
                 $nota->set('materia', $row["materia"]);
                 $nota->set('estudiante', $row["estudiante"]);
@@ -45,15 +48,16 @@ class Nota extends Modelo
         return $notas;
     }
 
-    public function insert(){
+    public function insert()
+    {
         $sql = SQLNota::insertInto();
         $db = new DB();
         $result = $db->execSQL(
             $sql,
             false,
             "sssd",
-            $this->materia,
             $this->estudiante,
+            $this->materia,
             $this->actividad,
             $this->nota
         );
@@ -61,35 +65,46 @@ class Nota extends Modelo
         return $result;
     }
 
-    public function update(){
+    public function update()
+    {
         $sql = SQLNota::update();
         $db = new DB();
         $result = $db->execSQL(
             $sql,
             false,
-            "sdss",
-            $this->actividad,
+            "dsss",
             $this->nota,
+            $this->estudiante,
             $this->materia,
-            $this->estudiante
-            
+            $this->actividad
         );
         $db->close();
         return $result;
     }
 
-    public function delete(){
+    public function delete()
+    {
         $sql = SQLNota::delete();
         $db = new DB();
         $result = $db->execSQL(
             $sql,
             false,
             "ss",
-            $this->materia,
-            $this->estudiante
+            $this->estudiante,
+            $this->materia
         );
         $db->close();
         return $result;
     }
+    
+
+    public function existeNotaPorEstudiante($codigoEstudiante)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM notas WHERE estudiante = ?";
+        $db = new DB();
+        $result = $db->execSQL($sql, true, "s", $codigoEstudiante);
+        $row = $result->fetch_assoc();
+        $db->close();
+        return $row["total"] > 0;
+    }
 }
-?>

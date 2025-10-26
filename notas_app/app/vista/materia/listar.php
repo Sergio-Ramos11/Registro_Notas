@@ -11,11 +11,11 @@ $materias = $materiaControlador->queryAllMaterias();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../public/css/tablas.css">
     <title>Materias</title>
 </head>
 <body>
-    <a href="crear.php">Agregar Nueva Materia</a><br>
-    <a href="editar.php">Actualizar Materia</a>
+    <a href="../materias_form.php">Agregar Nueva Materia</a><br>
 
     <h1>Lista de Materias</h1>
 
@@ -36,18 +36,23 @@ $materias = $materiaControlador->queryAllMaterias();
                 echo '  <td>' . $materia->get('nombre') . '</td>';
                 echo '  <td>' . $materia->get('programa') . '</td>';
                 echo '  <td>';
-                echo '      <button>';
-                echo '          <img src="../../../public/res/borrar.svg">';
-                echo '      </button>';
+                echo '      <form action="eliminar.php" method="POST">';
+                echo '          <input type="hidden" name="codigo" value="' . $materia->get('codigo') . '">';
+                echo '          <button type="submit">';
+                echo '              <img src="../../../public/res/borrar.svg" alt="Eliminar">';
+                echo '          </button>';
+                echo '      </form>';
                 echo '  </td>';
                 echo '  <td>';
-                echo '      <button>';
-                echo '          <img src="../../../public/res/editar.svg">';
-                echo '      </button>';
+                echo '      <a href="editar.php?cod=' . $materia->get('codigo') . '">';
+                echo '         <img src="../../../public/res/editar.svg">';
+                echo '      </a>';
                 echo '  </td>';
                 echo '</tr>';
             }
             ?>
+
+            <a href="../menu.php">Menu</a>  
         </tbody>
     </table>
 </body>

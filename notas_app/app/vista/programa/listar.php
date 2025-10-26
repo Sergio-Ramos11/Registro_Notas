@@ -11,12 +11,11 @@ $programas = $programaControlador->queryAllProgramas();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../public/css/tablas.css">
     <title>Programas</title>
 </head>
 <body>
-    <a href="../estudiantes_form.php">Agregar Programa Nuevo</a><br>
-    <a href="editar.php">Actualizar Programa</a>
-
+    <a href="../programas_form.php">Agregar Programa Nuevo</a><br>
     <h1>Lista de Programas</h1>
 
     <table>
@@ -34,18 +33,23 @@ $programas = $programaControlador->queryAllProgramas();
                 echo '  <td>' . $programa->get('codigo') . '</td>';
                 echo '  <td>' . $programa->get('nombre') . '</td>';
                 echo '  <td>';
-                echo '      <button>';
-                echo '          <img src="../../../public/res/borrar.svg">';
-                echo '      </button>';
+                echo '      <form action="eliminar.php" method="POST">';
+                echo '          <input type="hidden" name="codigo" value="' . $programa->get('codigo') . '">';
+                echo '          <button type="submit">';
+                echo '              <img src="../../../public/res/borrar.svg" alt="Eliminar">';
+                echo '          </button>';
+                echo '      </form>';
                 echo '  </td>';
                 echo '  <td>';
-                echo '      <button>';
+                echo '      <a href="editar.php?cod=' . $programa->get('codigo') . '">';
                 echo '          <img src="../../../public/res/editar.svg">';
-                echo '      </button>';
+                echo '      </a>';
                 echo '  </td>';
                 echo '</tr>';
             }
             ?>
+
+            <a href="../menu.php">Menu principal</a>
         </tbody>
     </table>
 </body>

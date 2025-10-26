@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../public/css/formularios.css">
     <title>Estudiantes form</title>
 </head>
+
 <body>
     <h1>Hola form estudiantes</h1>
 
     <form action="estudiante/crear.php" method="post">
-        <?php
-        if (!empty($_GET["cod"])) {
-            echo '<input type="hidden" name="id" value="' . $_GET["cod"] . '">';
-        }
-        ?>
+
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" name="codigo" required><br><br>
+
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required><br><br>
-
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required><br><br>
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br><br>
 
         <label for="programa">Programa:</label>
-        <select id="programa" name="programa" required>
-            <?php
-                $programas = $controlador->obtenerProgramas();
-                foreach ($programas as $programa) {
-                    echo "<option value='" . $programa['id'] . "'>" . $programa['nombre'] . "</option>";
-                }
-            ?>
-        </select><br><br>
+        <input type="text" id="programa" name="programa" required><br><br>
 
-        <input type="submit" value="Guardar">
+        <button type="submit">Guardar</button>
+    </form>
+    <a href="estudiante/listar.php">Volver</a>
 </body>
+
 </html>

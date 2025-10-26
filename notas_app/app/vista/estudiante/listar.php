@@ -11,12 +11,11 @@ $estudiantes = $estudiantesControlador->queryAllEstudiantes();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../public/css/tablas.css">
     <title>Estudiantes</title>
 </head>
 <body>
     <a href="../estudiantes_form.php">Agregar Nuevo Estudiante</a><br>
-    <a href="editar.php">Actualizar Estudiante</a>
-
     <h1>Lista de Estudiantes</h1>
 
     <table>
@@ -38,18 +37,23 @@ $estudiantes = $estudiantesControlador->queryAllEstudiantes();
                 echo '  <td>' . $estudiante->get('email') . '</td>';
                 echo '  <td>' . $estudiante->get('programa') . '</td>';
                 echo '  <td>';
-                echo '      <button>';
-                echo '          <img src="../../../public/res/borrar.svg">';
-                echo '      </button>';
+                echo '      <form action="eliminar.php" method="POST">';
+                echo '          <input type="hidden" name="codigo" value="' . $estudiante->get('codigo') . '">';
+                echo '          <button type="submit">';
+                echo '              <img src="../../../public/res/borrar.svg" alt="Eliminar">';
+                echo '          </button>';
+                echo '      </form>';
                 echo '  </td>';
                 echo '  <td>';
-                echo '      <button>';
+                echo '      <a href="editar.php?cod=' . $estudiante->get('codigo') . '">';
                 echo '          <img src="../../../public/res/editar.svg">';
-                echo '      </button>';
+                echo '      </a>';
                 echo '  </td>';
                 echo '</tr>';
             }
             ?>
+
+            <a href="../menu.php">Menu principal</a>
         </tbody>
     </table>
 </body>

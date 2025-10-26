@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Modelo;
 
-require __DIR__ . '/databases/db.php';
-require __DIR__ . '/modelo_sql/modelo.php';
-require __DIR__ . '/modelo_sql/sql_estudiantes.php';
+require_once __DIR__ . '/databases/db.php';
+require_once __DIR__ . '/modelo_sql/modelo.php';
+require_once __DIR__ . '/modelo_sql/sql_estudiantes.php';
 
 use App\Modelo\Databases\DB;
 use App\Modelo\SQLmodelo\Modelo;
@@ -16,15 +17,18 @@ class Estudiante extends Modelo
     private $email = null;
     private $programa = null;
 
-    public function get($prop){
+    public function get($prop)
+    {
         return $this->{$prop};
     }
 
-    public function set($prop, $value){
+    public function set($prop, $value)
+    {
         $this->{$prop} = $value;
     }
 
-    public function all(){
+    public function all()
+    {
         $sql = SQLEstudiante::selectAll();
         $db = new DB();
         $result = $db->execSQL($sql, true);
@@ -77,6 +81,8 @@ class Estudiante extends Modelo
         return $result;
     }
 
+
+
     public function delete()
     {
         $sql = SQLEstudiante::delete();
@@ -90,5 +96,14 @@ class Estudiante extends Modelo
         $db->close();
         return $result;
     }
+
+
+    public function tieneEstudiantes($codigoPrograma)
+    {
+        $sql = "SELECT COUNT(*) AS cantidad FROM estudiantes WHERE programa = ?";
+        $db = new DB();
+        $resultado = $db->execSQL($sql, true, "s", $codigoPrograma);
+        $row = $resultado->fetch_assoc();
+        return $row['cantidad'] > 0;
+    }
 }
-?>

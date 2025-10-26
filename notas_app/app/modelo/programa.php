@@ -1,33 +1,38 @@
 <?php
+
 namespace App\Modelo;
 
-require __DIR__ . '/databases/db.php';
-require __DIR__ . '/modelo_sql/modelo.php';
-require __DIR__ . '/modelo_sql/sql_programas.php';
+require_once __DIR__ . '/databases/db.php';
+require_once __DIR__ . '/modelo_sql/modelo.php';
+require_once __DIR__ . '/modelo_sql/sql_programas.php';
 
 use App\Modelo\Databases\DB;
 use App\Modelo\SQLmodelo\Modelo;
 use App\Modelo\SQLmodelo\SQLPrograma;
 
-class Programa extends Modelo{
+class Programa extends Modelo
+{
     private $codigo = null;
     private $nombre = null;
 
-    public function get($prop){
+    public function get($prop)
+    {
         return $this->{$prop};
     }
 
-    public function set($prop, $value){
+    public function set($prop, $value)
+    {
         $this->{$prop} = $value;
     }
 
-    public function all(){
+    public function all()
+    {
         $sql = SQLPrograma::selectAll();
         $db = new DB();
         $result = $db->execSQL($sql, true);
         $programas = [];
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $programa = new Programa();
                 $programa->set('codigo', $row["codigo"]);
                 $programa->set('nombre', $row["nombre"]);
@@ -38,7 +43,8 @@ class Programa extends Modelo{
         return $programas;
     }
 
-    public function insert(){
+    public function insert()
+    {
         $sql = SQLPrograma::insertInto();
         $db = new DB();
         $result = $db->execSQL(
@@ -52,7 +58,8 @@ class Programa extends Modelo{
         return $result;
     }
 
-    public function update(){
+    public function update()
+    {
         $sql = SQLPrograma::update();
         $db = new DB();
         $result = $db->execSQL(
@@ -66,7 +73,8 @@ class Programa extends Modelo{
         return $result;
     }
 
-    public function delete(){
+    public function delete()
+    {
         $sql = SQLPrograma::delete();
         $db = new DB();
         $result = $db->execSQL(
@@ -78,4 +86,5 @@ class Programa extends Modelo{
         $db->close();
         return $result;
     }
+    
 }
